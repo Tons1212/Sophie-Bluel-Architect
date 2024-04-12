@@ -12,6 +12,7 @@ getWorks();
 
 // Fonction pour afficher les photos dynamiquement
 async function displayWorks() {
+  gallery.innerHTML = "";
   const works = await getWorks();
   works.forEach((work) => {
     displayImg(work);
@@ -85,6 +86,28 @@ const modal = document.querySelector(".modal");
 const xmark = document.getElementById("modal-close");
 const galleryPhoto = document.querySelector(".galleryPhoto");
 
+if (logged === "true") {
+  filter.style.display = "none";
+  btnModify.style.display = "flex";
+  btnModify.addEventListener("click", () => {
+    modal.style.display = "flex";
+  });
+  logout.innerText = "logout";
+  logout.addEventListener("click", () => {
+    window.sessionStorage.logged = false;
+  });
+}
+
+xmark.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+modal.addEventListener("click", (e) => {
+  if (e.target.className === "modal") {
+    modal.style.display = "none";
+  }
+});
+
 async function displayPhotoModal() {
   galleryPhoto.innerHTML = "";
   const allPics = await getWorks();
@@ -115,7 +138,7 @@ function deletePhoto() {
         method: "DELETE",
         headers: { "content-type": "application/json" },
       };
-      fetch("http://localhost:5678/api/works/" + iconId, deletePic)
+      fetch("http://localhost:5678/api/works/1" + iconId, deletePic)
         .then((reponse) => {
           if (!reponse.ok) {
             console.log("la suppression n'a pas fonctionnée");
@@ -130,24 +153,3 @@ function deletePhoto() {
     });
   });
 }
-
-if (logged === "true") {
-  btnModify.style.display = "flex";
-  btnModify.addEventListener("click", () => {
-    modal.style.display = "flex";
-  });
-  logout.innerText = "logout";
-  logout.addEventListener("click", () => {
-    window.sessionStorage.logged = false;
-  });
-}
-
-xmark.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-modal.addEventListener("click", (e) => {
-  if (e.target.className === "modal") {
-    modal.style.display = "none";
-  }
-});
