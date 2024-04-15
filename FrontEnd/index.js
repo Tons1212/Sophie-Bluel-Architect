@@ -79,6 +79,7 @@ categoriesFilters();
 
 // Code si l'administrateur est connecté
 // Variables
+let token = localStorage.getItem("token");
 const logged = window.sessionStorage.logged;
 const logout = document.querySelector(".logout");
 const btnModify = document.querySelector(".btnModify");
@@ -136,9 +137,12 @@ function deletePhoto() {
       const iconId = icon.id;
       const deletePic = {
         method: "DELETE",
-        headers: { "content-type": "application/json" },
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer ${token}",
+        },
       };
-      fetch("http://localhost:5678/api/works/1" + iconId, deletePic)
+      fetch("http://localhost:5678/api/works/" + iconId, deletePic)
         .then((reponse) => {
           if (!reponse.ok) {
             console.log("la suppression n'a pas fonctionnée");
@@ -153,3 +157,67 @@ function deletePhoto() {
     });
   });
 }
+
+// faire apparaître la 2ème modale
+const btnAddphoto = document.querySelector(".modalContent .addPhoto");
+const modalAddPhoto = document.querySelector(".modalAddPhoto");
+const modalContent = document.querySelector(".modalContent");
+const returnArrow = document.querySelector(".fa-arrow-left");
+const closeMark = document.querySelector(".modalAddPhoto .fa-xmark");
+
+function displayModalAddPhoto() {
+  btnAddphoto.addEventListener("click", () => {
+    modalContent.style.display = "none";
+    modalAddPhoto.style.display = "flex";
+  });
+  returnArrow.addEventListener("click", () => {
+    modalContent.style.display = "flex";
+    modalAddPhoto.style.display = "none";
+  });
+  closeMark.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+}
+
+displayModalAddPhoto();
+
+// Afficher la preview de l'image
+const previewImg = document.querySelector(".previewContainer img");
+const inputFile = document.querySelector(".previewContainer input");
+const labelFile = document.querySelector(".previewContainer label");
+const iconFile = document.querySelector(".previewContainer .fa-image");
+const descFile = document.querySelector(".previewContainer p");
+
+// On écoute les changements de l'input
+inputFile.addEventListener("change", () => {
+  const file = inputFile.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      previewImg.src = e.target.result;
+      previewImg.style.display = "flex";
+      labelFile.style.display = "none";
+      iconFile.style.display = "none";
+      descFile.style.display = "none";
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+// Création de la liste déroulante des catégories
+async function displayModalCategories() {
+  const baliseSelect = document.querySelector(".modalAddPhoto select");
+  const categories = await getCategories();
+  categories.forEach((category) => {
+    const option = document.createElement("option");
+    option.value = category.id;
+    option.textContent = category.name;
+    baliseSelect.appendChild(option);
+  });
+}
+displayModalCategories();
+
+// Ajouter un vehicule avec la methode POST
+const form = document.querySelector(".modalAddPhoto form");
+const title = document.getElementById("title");
+const category = document.getElementById("category");

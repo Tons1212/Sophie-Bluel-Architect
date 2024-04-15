@@ -264,6 +264,92 @@ footer nav ul {
 	cursor: pointer;
 }
 
+.modalAddPhoto {
+	background-color: white;
+	width: 30%;
+	height: 70%;
+	border-radius: 10px;
+	display: none;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.fa-arrow-left {
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	font-size: 25px;
+	cursor: pointer;
+}
+
+.modalAddPhoto .fa-xmark {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	font-size: 25px;
+	cursor: pointer;
+}
+
+.fa-image {
+	font-size: 6em;
+	color: #CBD6DC;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 80%;
+	height: 80%;
+	gap: 10px;
+}
+
+.previewContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 30px;
+	gap: 10px;
+	background-color: #E8F1F6;
+	margin-bottom: 30px;
+}
+
+.previewContainer label {
+	background-color: #CBD6DC;
+	border-radius: 30px;
+	padding: 1em 2.8em;
+	cursor: pointer;
+}
+
+.previewContainer input {
+	display: none;
+}
+
+.previewContainer img {
+	display: none;
+	max-width: 100%;
+	height: 100%;
+}
+
+#title, #category {
+	font-family: 'Syne';
+	font-size: 16px;
+	width: auto;
+    height: 50px;
+	padding-left: 10px;
+    margin-top: 7px;
+    margin-bottom: 30px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.greyBorder {
+	border-bottom: solid 2px #d0d0d0;
+}
+
+
 .galleryPhoto {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -311,5 +397,6 @@ footer nav ul {
 	border-radius: 60px ;
 	border: none;
 	height: 40px;
+	cursor: pointer;
 }
 
