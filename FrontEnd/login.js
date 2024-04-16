@@ -24,8 +24,6 @@ let loginBtn = element.submit.addEventListener("click", (e) => {
   })
     .then((reponse) => reponse.json())
     .then((data) => {
-      sessionStorage.setItem("Token", data.token);
-
       if (data.userId == 1) {
         window.sessionStorage.logged = true;
         localStorage.setItem("token", data.token);

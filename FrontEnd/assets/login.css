@@ -17,17 +17,11 @@ a, .login {
     margin-top: 150px;
   }
   
-  .form {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 380px;
-    margin-top: 37px;
-  }
-  
   .connection {
     display: flex;
+    align-items: center;
     flex-direction: column;
-    margin: 0 auto;
+    margin: 50px auto;
   }
   
   .connection label {

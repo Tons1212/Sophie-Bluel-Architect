@@ -109,6 +109,7 @@ modal.addEventListener("click", (e) => {
   }
 });
 
+// Afficher les photos dans la modale
 async function displayPhotoModal() {
   galleryPhoto.innerHTML = "";
   const allPics = await getWorks();
@@ -130,6 +131,7 @@ async function displayPhotoModal() {
 
 displayPhotoModal();
 
+// Supprimer une photo de la modale avec la method DELETE
 function deletePhoto() {
   const iconDelete = document.querySelectorAll(".fa-trash-can");
   iconDelete.forEach((icon) => {
@@ -221,3 +223,23 @@ displayModalCategories();
 const form = document.querySelector(".modalAddPhoto form");
 const title = document.getElementById("title");
 const category = document.getElementById("category");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const formData = new FormData(form);
+  fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: {
+      Authorization: `bearer ${token}`,
+      accept: "application/json",
+      "Content-Type": "multipart/form-data",
+    },
+  })
+    .then((reponse) => reponse.json())
+    .then((data) => {
+      console.log(data);
+      displayPhotoModal();
+      displayWorks();
+    });
+});

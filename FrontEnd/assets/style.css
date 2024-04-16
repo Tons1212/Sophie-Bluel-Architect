@@ -244,8 +244,8 @@ footer nav ul {
 
 .modalContent {
 	background-color: white;
-	width: 30%;
-	height: 70%;
+	width: 35%;
+	min-height: 80%;
 	border-radius: 10px;
 	display: flex;
 	justify-content: center;
