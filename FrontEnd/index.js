@@ -131,7 +131,7 @@ async function displayPhotoModal() {
 
 displayPhotoModal();
 
-// Supprimer une photo de la modale avec la method DELETE
+// Supprimer une photo de la modale avec la methode DELETE
 function deletePhoto() {
   const iconDelete = document.querySelectorAll(".fa-trash-can");
   iconDelete.forEach((icon) => {
@@ -141,7 +141,7 @@ function deletePhoto() {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
-          Authorization: "Bearer ${token}",
+          Authorization: "Bearer " + token,
         },
       };
       fetch("http://localhost:5678/api/works/" + iconId, deletePic)
@@ -229,11 +229,10 @@ form.addEventListener("submit", async (e) => {
   const formData = new FormData(form);
   fetch("http://localhost:5678/api/works", {
     method: "POST",
-    body: JSON.stringify(formData),
+    body: formData,
     headers: {
-      Authorization: `bearer ${token}`,
+      Authorization: "Bearer " + token,
       accept: "application/json",
-      "Content-Type": "multipart/form-data",
     },
   })
     .then((reponse) => reponse.json())
@@ -243,3 +242,5 @@ form.addEventListener("submit", async (e) => {
       displayWorks();
     });
 });
+
+// Function pour verifier que tous les champs sont remplis

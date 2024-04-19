@@ -1,15 +1,12 @@
 // Variables d'objets des éléments pour le login
-const element = {
+const user = {
   email: document.getElementById("email"),
   password: document.getElementById("password"),
   submit: document.querySelector(".submit"),
 };
 const error = document.querySelector("form p");
 
-// const form = document.querySelector("form");
-// const errMessage = document.querySelector("form p");
-
-let loginBtn = element.submit.addEventListener("click", (e) => {
+let loginBtn = user.submit.addEventListener("click", (e) => {
   e.preventDefault();
   fetch("http://localhost:5678/api/users/login", {
     method: "POST",
@@ -18,8 +15,8 @@ let loginBtn = element.submit.addEventListener("click", (e) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      email: element.email.value,
-      password: element.password.value,
+      email: user.email.value,
+      password: user.password.value,
     }),
   })
     .then((reponse) => reponse.json())
